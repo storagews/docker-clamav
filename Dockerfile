@@ -28,13 +28,11 @@ RUN mkdir /var/run/clamav && \
     chown clamav:clamav /var/run/clamav && \
     chmod 750 /var/run/clamav
 #
-RUN sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf && \
-    echo "TCPSocket 3310" >> /etc/clamav/clamd.conf && \
-    sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/freshclam.conf && \
+RUN sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf
+RUN echo "TCPSocket 3310" >> /etc/clamav/clamd.conf
+RUN sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/freshclam.conf && \
     sed -i 's/^MaxFileSize .*$/MaxFileSize 256M/g' /etc/clamav/clamd.conf && \
     sed -i 's/^StreamMaxLength .*$/StreamMaxLength 512M/g' /etc/clamav/clamd.conf
-#
-EXPOSE 3310
 #
 ADD bootstrap.sh /
 # ->
